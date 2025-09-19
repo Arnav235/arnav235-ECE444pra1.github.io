@@ -107,6 +107,11 @@
       </li>
 
       <li class="bold">
+        <a aria-label="Navigate to the Recent Projects section" href="#recent-projects" class="waves-effect waves-dark teal-text"><i
+            class="mdi-av-my-library-books small"></i><span>Recent Projects</span></a>
+      </li>
+
+      <li class="bold">
         <!--
         ICONS:
         mdi-action-assessment
@@ -186,6 +191,10 @@
       <li class="bold">
         <a aria-label="Navigate to the Projects section" href="#projects" class="waves-effect waves-dark teal-text"><i
             class="mdi-av-my-library-books small"></i><span>Projects</span></a>
+      </li>
+      <li class="bold">
+        <a aria-label="Navigate to the Recent Projects section" href="#recent-projects" class="waves-effect waves-dark teal-text"><i
+            class="mdi-av-my-library-books small"></i><span>Recent Projects</span></a>
       </li>
       <li class="bold">
         <a aria-label="Navigate to the Skills section" href="#skills" class="waves-effect waves-dark teal-text"><i
@@ -456,6 +465,21 @@
       </div>
     </section>
 
+    <!-- Recent Projects Section -->
+    <section id="recent-projects" class="section scrollspy">
+      <h3 class="page-title white-text teal">Recent Projects</h3>
+      <div class="container">
+        <div id="recent-projects-container" class="row">
+          <!-- Dynamic content will be inserted here -->
+        </div>
+        <div class="row center">
+          <button id="load-more-btn" class="btn waves-effect waves-light teal" style="display: none;">
+            Load More Projects
+          </button>
+        </div>
+      </div>
+    </section>
+
     <!-- Fifth Section: Skills -->
     <section id="skills" class="section scrollspy">
       <h3 class="page-title white-text teal">Skills</h3>
@@ -698,6 +722,142 @@
         closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
       })
     })
+
+    // Recent Projects JavaScript
+    const projects = [
+      {
+        title: "Ultimate Tic-Tac-Toe",
+        description: "Ultimate Tic-Tac-Toe using the AlphaGo algorithm",
+        image: "/assets/img/Super_tic-tac-toe_rules_example.png",
+        tools: "Python, PyTorch",
+        details: "Ultimate Tic-Tac-Toe using the AlphaGo algorithm",
+        liveUrl: "https://arnavparuthi.com/uttt.html",
+        githubUrl: "https://github.com/Arnav235/ultimate_tic-tac-toe_alphazero"
+      },
+      {
+        title: "Atari Breakout AI",
+        description: "AI to play Atari Breakout",
+        image: "/assets/img/Breakout_OG-logo.jpg",
+        tools: "Python, PyTorch",
+        details: "AI to play Atari Breakout",
+        liveUrl: "https://arnavparuthi.com/DQN.html",
+        githubUrl: "https://github.com/Arnav235/OpenAITaxi"
+      },
+      {
+        title: "Machine Learning Pipeline",
+        description: "End-to-end ML pipeline for data processing and model training",
+        image: "/assets/img/tensorflow-logo-1.png",
+        tools: "Python, TensorFlow, Scikit-learn",
+        details: "Built a comprehensive machine learning pipeline that processes raw data, performs feature engineering, trains multiple models, and provides predictions with confidence intervals.",
+        liveUrl: "#",
+        githubUrl: "https://github.com/Arnav235/ml-pipeline"
+      },
+      {
+        title: "Web Scraping Tool",
+        description: "Automated web scraping tool with data analysis capabilities",
+        image: "/assets/img/python-logo-1-300x300.jpg",
+        tools: "Python, BeautifulSoup, Pandas",
+        details: "Developed a robust web scraping tool that extracts data from various websites, cleans and processes the data, and generates comprehensive reports.",
+        liveUrl: "#",
+        githubUrl: "https://github.com/Arnav235/web-scraper"
+      },
+      {
+        title: "Real-time Chat Application",
+        description: "Real-time messaging application with WebSocket support",
+        image: "/assets/img/nodejs-logo.png",
+        tools: "Node.js, Socket.io, React",
+        details: "Created a real-time chat application with user authentication, message encryption, and file sharing capabilities.",
+        liveUrl: "#",
+        githubUrl: "https://github.com/Arnav235/chat-app"
+      },
+      {
+        title: "Data Visualization Dashboard",
+        description: "Interactive dashboard for data analysis and visualization",
+        image: "/assets/img/d3js-logo.png",
+        tools: "JavaScript, D3.js, Python",
+        details: "Built an interactive dashboard that visualizes complex datasets with multiple chart types, filtering options, and real-time updates.",
+        liveUrl: "#",
+        githubUrl: "https://github.com/Arnav235/data-dashboard"
+      }
+    ];
+
+    let displayedProjects = 0;
+    const projectsPerLoad = 2;
+
+    function createProjectCard(project) {
+      return `
+        <div class="col s12 m6 l4">
+          <div class="card medium">
+            <div class="card-image waves-effect waves-block waves-light">
+              <img alt="${project.title}" src="${project.image}" style="height: 100%; width: 100%" class="activator" />
+            </div>
+            <div class="card-content">
+              <span class="card-title activator teal-text hoverline">${project.title}<i
+                  class="mdi-navigation-more-vert right"></i></span>
+              <p>${project.description}</p>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text"><small>Accomplishments</small><i
+                  class="mdi-navigation-close right"></i></span>
+              <ul>
+                <li><b>Tools:</b> ${project.tools}</li>
+                <li>${project.details}</li>
+              </ul>
+              <div class="card-action">
+                <a aria-label="Visit ${project.title}" href="${project.liveUrl}" target="_blank" data-position="top"
+                  data-tooltip="View Online"
+                  class="btn-floating btn-large waves-effect waves-light blue-grey tooltipped"><i
+                    class="fa fa-external-link"></i></a>
+                <a aria-label="Visit the GitHub repo for ${project.title}" href="${project.githubUrl}"
+                  target="_blank" data-position="top" data-tooltip="View Source"
+                  class="btn-floating btn-large waves-effect waves-light blue-grey tooltipped"><i
+                    class="fa fa-github"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function displayProjects() {
+      const container = document.getElementById('recent-projects-container');
+      const loadMoreBtn = document.getElementById('load-more-btn');
+      
+      // Clear container
+      container.innerHTML = '';
+      
+      // Display projects up to the current count
+      for (let i = 0; i < displayedProjects; i++) {
+        if (i < projects.length) {
+          container.innerHTML += createProjectCard(projects[i]);
+        }
+      }
+      
+      // Show/hide load more button
+      if (displayedProjects < projects.length) {
+        loadMoreBtn.style.display = 'block';
+      } else {
+        loadMoreBtn.style.display = 'none';
+      }
+      
+      // Re-initialize Materialize tooltips
+      $('.tooltipped').tooltip();
+    }
+
+    function loadMoreProjects() {
+      displayedProjects = Math.min(displayedProjects + projectsPerLoad, projects.length);
+      displayProjects();
+    }
+
+    // Initialize on page load
+    $(document).ready(function() {
+      // Start by showing the latest project (first in array)
+      displayedProjects = 1;
+      displayProjects();
+      
+      // Add event listener for load more button
+      document.getElementById('load-more-btn').addEventListener('click', loadMoreProjects);
+    });
   </script>
 </body>
 

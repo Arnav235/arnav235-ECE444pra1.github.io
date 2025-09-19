@@ -40,12 +40,40 @@ https://github.com/varadbhogayata/varadbhogayata.github.io
 ✔️ About me\
 ✔️ Experience\
 ✔️ Projects \
+✔️ Recent Projects (Dynamic) \
 ✔️ Skills \
 ✔️ Education\
 ✔️ Contact Info\
 ✔️ Resume
 
 To view a live example, **[click here](https://varadbhogayata.github.io/)**
+
+## Recent Projects Feature 🚀
+
+This portfolio includes a dynamic "Recent Projects" section that showcases the latest projects with the following features:
+
+### Features:
+- **Dynamic Content Loading**: Displays only the latest project initially
+- **Load More Functionality**: Button to load additional projects (2 at a time)
+- **Responsive Design**: Projects are displayed in a responsive grid layout
+- **Interactive Cards**: Each project card includes:
+  - Project image
+  - Title and description
+  - Expandable details with tools used
+  - Links to live demo and GitHub repository
+  - Material Design animations
+
+### Technical Implementation:
+- **JavaScript Array**: Projects are stored in a JavaScript array for easy management
+- **DOM Manipulation**: Uses vanilla JavaScript to dynamically generate HTML content
+- **Materialize Integration**: Leverages Materialize CSS framework for styling and animations
+- **Event Handling**: Implements click events for the "Load More" button
+
+### How it Works:
+1. On page load, only the first (latest) project is displayed
+2. Users can click "Load More Projects" to reveal additional projects
+3. Projects are loaded in batches of 2 for optimal user experience
+4. The "Load More" button disappears when all projects are displayed
 
 ## Tools Used 🛠️
 * [<b>GitHub Pages</b>](https://create-react-app.dev/docs/deployment/#github-pages) - To host my static website (HTML, CSS, JS).
